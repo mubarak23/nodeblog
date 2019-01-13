@@ -3,11 +3,12 @@ var router = express.Router();
 
 /*  listing. */
 router.get('/add', function(req, res, next) {
-  res.json("Welcome You All");
-  /*res.render('addpost', {
-  	'title': 'Add Post'
-  });*/
-  //next();
+	//var categories = db.get('categories');
+	//console.log("welcome home");
+		res.render('addpost',{
+  			'title': 'Add Post'
+  		});
+	
 });
 
 module.exports = router;

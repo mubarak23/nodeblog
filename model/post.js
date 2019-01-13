@@ -1,10 +1,11 @@
-var monk = require('monk');
+var mongoose = require('mongoose');
 
-var PostSchema = new monk.Schema({
+var PostSchema = new mongoose.Schema({
 	title: { type: String, lowercase: true},
 	body: {type: String, lowercase: true},
-	category: {type: String, lowercase: true}
+	category: {type: String, lowercase: true},
 	author: String,
-	date: String
+	date: String,
+	mainimage: String
 })
 module.export = mongoose.model('posts', PostSchema);

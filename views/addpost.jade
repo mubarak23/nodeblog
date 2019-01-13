@@ -13,8 +13,9 @@ block content
 		.form-group
 			label Category
 			select.form-control(name='category')
-				each category, i in categories
-					option(value='#{category.name}') #{category.name}
+				option(value='Technology') Technology
+				option(value='Art') Art
+				option(value='Music') Music
 		.form-group
 			label Body
 			textarea.form-control(name='body', id='body')
