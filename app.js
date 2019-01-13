@@ -12,8 +12,9 @@ var multer = require("multer");
 var upload = multer({ dest: 'uploads/' });
 var expressValidator = require("express-validator");
 var mongdb = require("mongodb");
-var Post = require('./model/post');
 var mongoose = require('mongoose');
+var Post = require('./model/post');
+
 
 /*var db = monk('mongodb://root:root123@ds251240.mlab.com:51240/nodehome')
 ;*/
@@ -120,14 +121,25 @@ app.post('/posts/add',upload.single('mainimage'),  function(req, res){
   req.checkBody('body', 'Body field is required').notEmpty();
 
   // Check Errors
-  var errors = req.validationErrors();
-  if(error){
-    res.render('addpost', {
-      "error": error
-    })
-  }else{
-    var posts = db.get('posts');
-      post.insert({
+  
+    var post = new Post();
+        post.title = title;
+        post.body = body;
+        post.author = author
+        post.date = date;
+        post.category = category;
+        post.mainimage = mainimage;
+        post.save(function(err, post){
+            if(err){
+              console.log(err);
+            }else{
+             req.flash('success','Post Added');
+             res.location('/');
+             res.redirect('/');
+            }
+        })
+
+      /*post.insert({
         "title": title,
         "body": body,
         "author": author,
@@ -142,11 +154,11 @@ app.post('/posts/add',upload.single('mainimage'),  function(req, res){
         res.location('/');
         res.redirect('/');
         }
-      })
+      })*/
 
 
 
-  }
+  
 })
 
 /*app.use(function(req, res, next) {
